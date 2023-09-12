@@ -159,71 +159,71 @@ async function getInstance() {
 self.addEventListener("push", function (event) {
   console.log("Push received by service worker. Handling...");
 
-  // class IndexedDBManager {
-  //   constructor(dbName, dbVersion) {
-  //     this.dbName = dbName;
-  //     this.dbVersion = dbVersion;
-  //     this.db = null;
-  //   }
+  class IndexedDBManager {
+    constructor(dbName, dbVersion) {
+      this.dbName = dbName;
+      this.dbVersion = dbVersion;
+      this.db = null;
+    }
 
-  //   async openDatabase() {
-  //     return new Promise((resolve, reject) => {
-  //       const request = indexedDB.open(this.dbName, this.dbVersion);
+    async openDatabase() {
+      return new Promise((resolve, reject) => {
+        const request = indexedDB.open(this.dbName, this.dbVersion);
 
-  //       request.onupgradeneeded = (event) => {
-  //         const db = event.target.result;
-  //         if (!db.objectStoreNames.contains("notifications")) {
-  //           db.createObjectStore("notifications", { keyPath: "id" });
-  //         }
-  //       };
+        request.onupgradeneeded = (event) => {
+          const db = event.target.result;
+          if (!db.objectStoreNames.contains("notifications")) {
+            db.createObjectStore("notifications", { keyPath: "id" });
+          }
+        };
 
-  //       request.onsuccess = (event) => {
-  //         this.db = event.target.result;
-  //         resolve();
-  //       };
+        request.onsuccess = (event) => {
+          this.db = event.target.result;
+          resolve();
+        };
 
-  //       request.onerror = (event) => {
-  //         reject(event.target.error);
-  //       };
-  //     });
-  //   }
+        request.onerror = (event) => {
+          reject(event.target.error);
+        };
+      });
+    }
 
-  //   async updatePushNotificationCount(newCount) {
-  //     if (!this.db) {
-  //       throw new Error("Database not open.");
-  //     }
+    async updatePushNotificationCount(newCount) {
+      if (!this.db) {
+        throw new Error("Database not open.");
+      }
 
-  //     const transaction = this.db.transaction(["notifications"], "readwrite");
-  //     const store = transaction.objectStore("notifications");
-  //     store.put({ id: "pushNotificationCount", value: newCount });
-  //   }
+      const transaction = this.db.transaction(["notifications"], "readwrite");
+      const store = transaction.objectStore("notifications");
+      store.put({ id: "pushNotificationCount", value: newCount });
+    }
 
-  //   async getPushNotificationCount() {
-  //     if (!this.db) {
-  //       throw new Error("Database not open.");
-  //     }
+    async getPushNotificationCount() {
+      if (!this.db) {
+        throw new Error("Database not open.");
+      }
 
-  //     return new Promise((resolve, reject) => {
-  //       const transaction = this.db.transaction(["notifications"], "readonly");
-  //       const store = transaction.objectStore("notifications");
+      return new Promise((resolve, reject) => {
+        const transaction = this.db.transaction(["notifications"], "readonly");
+        const store = transaction.objectStore("notifications");
 
-  //       const request = store.get("pushNotificationCount");
+        const request = store.get("pushNotificationCount");
 
-  //       request.onsuccess = () => {
-  //         const count = request.result.value || 0;
-  //         resolve(count);
-  //       };
+        request.onsuccess = () => {
+          const count = request.result.value || 0;
+          resolve(count);
+        };
 
-  //       request.onerror = () => {
-  //         reject(request.error);
-  //       };
-  //     });
-  //   }
-  // }
+        request.onerror = () => {
+          reject(request.error);
+        };
+      });
+    }
+  }
 
-  // async function getInstance() {
-  //   return new IndexedDBManager("notification-database", 1);
-  // }
+  async function getInstance() {
+    return new IndexedDBManager("notification-database", 1);
+  }
 
   // Retrieve the textual payload from event.data (a PushMessageData object).
   // Other formats are supported (ArrayBuffer, Blob, JSON), check out the documentation
