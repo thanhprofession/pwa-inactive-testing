@@ -100,3 +100,11 @@ document.getElementById("getFromIDB").onclick = function () {
     });
   }
 };
+
+document.getElementById("addToCache").onclick = function () {
+  if ("serviceWorker" in navigator && navigator.serviceWorker.controller) {
+    navigator.serviceWorker.controller.postMessage({
+      type: "INITIATE_CACHE",
+    });
+  }
+};
