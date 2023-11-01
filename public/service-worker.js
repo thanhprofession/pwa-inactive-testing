@@ -139,21 +139,25 @@ self.addEventListener("push", function (event) {
 
   // Attempt 1 with IndexedDB
   const sendPushNotification = async () => {
-    console.log("calling sendPushNotification");
-    try {
-      const indexedDBManager = await getInstance();
-      await indexedDBManager.openDatabase();
-      const count = await indexedDBManager.getPushNotificationCount();
-      self.registration.showNotification(count, {
-        body: count,
-        icon: "https://icons.iconarchive.com/icons/paomedia/small-n-flat/256/sign-right-icon.png",
-      });
-    } catch (e) {
-      self.registration.showNotification(e.message, {
-        body: e.message,
-        icon: "https://icons.iconarchive.com/icons/paomedia/small-n-flat/256/sign-right-icon.png",
-      });
-    }
+    // console.log("calling sendPushNotification");
+    // try {
+    //   const indexedDBManager = await getInstance();
+    //   await indexedDBManager.openDatabase();
+    //   const count = await indexedDBManager.getPushNotificationCount();
+    //   self.registration.showNotification(count, {
+    //     body: count,
+    //     icon: "https://icons.iconarchive.com/icons/paomedia/small-n-flat/256/sign-right-icon.png",
+    //   });
+    // } catch (e) {
+    //   self.registration.showNotification(e.message, {
+    //     body: e.message,
+    //     icon: "https://icons.iconarchive.com/icons/paomedia/small-n-flat/256/sign-right-icon.png",
+    //   });
+    // }
+    self.registration.showNotification("Test title", {
+      body: "This is a test body",
+      icon: "https://icons.iconarchive.com/icons/paomedia/small-n-flat/256/sign-right-icon.png",
+    });
   };
 
   event.waitUntil(sendPushNotification());
