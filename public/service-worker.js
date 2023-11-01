@@ -146,10 +146,12 @@ self.addEventListener("push", function (event) {
       const count = await indexedDBManager.getPushNotificationCount();
       self.registration.showNotification(count, {
         body: count,
+        icon: "https://icons.iconarchive.com/icons/paomedia/small-n-flat/256/sign-right-icon.png",
       });
     } catch (e) {
       self.registration.showNotification(e.message, {
         body: e.message,
+        icon: "https://icons.iconarchive.com/icons/paomedia/small-n-flat/256/sign-right-icon.png",
       });
     }
   };

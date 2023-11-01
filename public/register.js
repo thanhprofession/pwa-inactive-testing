@@ -1,7 +1,7 @@
 console.log("registering service worker");
 
 const API_URL =
-  "https://20b2-2600-1700-466a-4780-8591-12a-a0e3-f0ac.ngrok-free.app";
+  "https://52d1-2600-1700-466a-4780-948c-e4ec-5a2-6e8c.ngrok-free.app";
 
 // Register a Service Worker.
 navigator.serviceWorker.register("/service-worker.js");
